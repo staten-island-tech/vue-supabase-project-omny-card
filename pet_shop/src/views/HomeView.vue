@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Pls log in to your acc here</h1>
+    <h1>home view</h1>
   </div>
 </template>
 
