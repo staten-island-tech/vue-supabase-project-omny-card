@@ -6,4 +6,22 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
+
+<!-- <script setup>
+import { useTestStore } from '@/stores/auth'
+
+const test = useTestStore()
+</script>
+
+<template>
+  <div>
+    <h1>Pinia Test</h1>
+
+    <p>Count: {{ test.count }}</p>
+
+    <button @click="test.increment">Click me</button>
+  </div>
+</template>
+
+<style scoped></style> -->
