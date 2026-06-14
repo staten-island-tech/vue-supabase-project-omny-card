@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
   const error = ref(null)
   const loading = ref(false)
 
-  // 🔐 LOGIN
   const login = async (email, password) => {
     loading.value = true
     error.value = null
@@ -27,13 +26,11 @@ export const useAuthStore = defineStore('auth', () => {
     loading.value = false
   }
 
-  // 🚪 LOGOUT
   const logout = async () => {
     await supabase.auth.signOut()
     user.value = null
   }
 
-  // 🔄 RESTORE SESSION (important)
   const getUser = async () => {
     const { data } = await supabase.auth.getUser()
     user.value = data.user
