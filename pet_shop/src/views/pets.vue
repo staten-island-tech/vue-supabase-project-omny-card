@@ -41,7 +41,7 @@
           <button
             class="adopt-btn"
             :disabled="pet.status !== 'Available'"
-            @click="adoptPet(pet.id)"
+            @click="adoptPet(pet.id, $event)"
           >
             Adopt
           </button>
@@ -57,6 +57,18 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import gsap from 'gsap'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  gsap.from('.card', {
+    opacity: 0,
+    y: 40,
+    duration: 0.6,
+    stagger: 0.08,
+    ease: 'power2.out',
+  })
+})
 
 const selectedFilter = ref('all')
 const loggedIn = ref(true)
@@ -275,13 +287,23 @@ const filteredpets = computed(() => {
   return pets.value[0].filter((pet) => pet.species.toLowerCase().includes(selectedFilter.value))
 })
 
-function adoptPet(id) {
+function adoptPet(id, event) {
   const pet = pets.value[0].find((p) => p.id === id)
 
   if (pet && pet.status === 'Available') {
     pet.status = 'Adopted'
-
     cart.value.push(pet)
+
+    gsap.fromTo(
+      event.target,
+      { scale: 1 },
+      {
+        scale: 1.2,
+        duration: 0.1,
+        yoyo: true,
+        repeat: 1,
+      },
+    )
   }
 }
 
