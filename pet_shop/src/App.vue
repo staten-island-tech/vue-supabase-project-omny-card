@@ -1,41 +1,62 @@
 <template>
-  <div class="router-links">
+  <div :class="theme">
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/login">Login</RouterLink>
     </nav>
+
+    <button @click="changeTheme">
+      {{ buttonText }}
+    </button>
+
+    <RouterView />
   </div>
-  <RouterView />
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+
+const theme = ref('light')
+const buttonText = ref('Dark Mode')
+
+function changeTheme() {
+  if (theme.value === 'light') {
+    theme.value = 'dark'
+    buttonText.value = 'Light Mode'
+  } else {
+    theme.value = 'light'
+    buttonText.value = 'Dark Mode'
+  }
+}
 </script>
 
 <style scoped>
+.light {
+  background-color: white;
+  color: black;
+  min-height: 100vh;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+}
+
 nav {
   width: 100%;
-  font-size: 12px;
   text-align: center;
   margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
 nav a {
-  display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
 }
 
-nav a:first-of-type {
-  border: 0;
+button {
+  display: block;
+  margin: 20px auto;
 }
 </style>
