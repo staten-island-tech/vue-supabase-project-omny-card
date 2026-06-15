@@ -374,4 +374,23 @@ function deletepet(item) {
   color: blue;
   font-weight: bold;
 }
+
+.card {
+  border: 1px solid gray;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #f8f8f8;
+  color: black;
+}
+
+.dark .card {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+.dark .cart {
+  background-color: #2d2d2d;
+  color: white;
+  border-color: white;
+}
 </style>
