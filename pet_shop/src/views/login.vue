@@ -23,7 +23,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 
@@ -31,5 +33,9 @@ const auth = useAuthStore()
 
 const handleLogin = async () => {
   await auth.login(email.value, password.value)
+
+  if (auth.user) {
+    router.push('/pets')
+  }
 }
 </script>

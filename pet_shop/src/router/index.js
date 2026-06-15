@@ -10,6 +10,7 @@ const router = createRouter({
       path: '/pets',
       name: 'pets',
       component: Pets,
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -31,6 +32,20 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
   ],
+})
+
+import { useAuthStore } from '@/stores/auth'
+
+router.beforeEach(async (to) => {
+  const auth = useAuthStore()
+
+  await auth.getUser()
+
+  if (to.meta.requiresAuth && !auth.user) {
+    return '/login'
+  }
+
+  return true
 })
 
 export default router
