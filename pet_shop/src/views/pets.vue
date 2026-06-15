@@ -3,14 +3,23 @@
     <div v-if="loggedIn">
       <h1>Shop</h1>
 
-      <div v-for="pet in pets[0]" :key="pet.id">
-        <h2>{{ pet.name }}</h2>
-        <p>Breed: {{ pet.breed }}</p>
-        <p>Age: {{ pet.age }}</p>
-        <p>Gender: {{ pet.gender }}</p>
-        <p>Price: ${{ pet.price }}</p>
-        <p>Status: {{ pet.status }}</p>
-        <hr />
+      <div class="grid">
+        <div v-for="pet in pets[0]" :key="pet.id" class="card">
+          <h2 class="name">{{ pet.name }}</h2>
+
+          <div class="info">
+            <p><strong>Breed:</strong> {{ pet.breed }}</p>
+            <p><strong>Age:</strong> {{ pet.age }}</p>
+            <p><strong>Gender:</strong> {{ pet.gender }}</p>
+            <p><strong>Price:</strong> ${{ pet.price }}</p>
+            <p>
+              <strong>Status:</strong>
+              <span :class="pet.status.toLowerCase()">
+                {{ pet.status }}
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -22,6 +31,7 @@
 
 <script setup>
 import { ref } from 'vue'
+
 const loggedIn = ref(true)
 
 const pets = [
@@ -121,7 +131,46 @@ const pets = [
 </script>
 
 <style scoped>
-hr {
-  margin: 10px 0;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.name {
+  margin-bottom: 10px;
+}
+
+.info p {
+  margin: 6px 0;
+}
+
+.available {
+  color: green;
+  font-weight: bold;
+}
+
+.sold {
+  color: red;
+  font-weight: bold;
+}
+
+.pending {
+  color: orange;
+  font-weight: bold;
 }
 </style>
