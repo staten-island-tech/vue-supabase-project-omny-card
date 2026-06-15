@@ -1,13 +1,29 @@
 <template>
   <div>
-    <h1>Shop</h1>
-    <div v-for="pet in pets[0]" :key="pet.id">
-      {{ pet.name }}
+    <div v-if="loggedIn">
+      <h1>Shop</h1>
+
+      <div v-for="pet in pets[0]" :key="pet.id">
+        <h2>{{ pet.name }}</h2>
+        <p>Breed: {{ pet.breed }}</p>
+        <p>Age: {{ pet.age }}</p>
+        <p>Gender: {{ pet.gender }}</p>
+        <p>Price: ${{ pet.price }}</p>
+        <p>Status: {{ pet.status }}</p>
+        <hr />
+      </div>
+    </div>
+
+    <div v-else>
+      <h1>Please log in to view the shop.</h1>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+const loggedIn = ref(true)
+
 const pets = [
   [
     {
@@ -104,4 +120,8 @@ const pets = [
 ]
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+hr {
+  margin: 10px 0;
+}
+</style>
