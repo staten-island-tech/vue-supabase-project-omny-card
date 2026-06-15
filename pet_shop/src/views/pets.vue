@@ -14,7 +14,7 @@
             <p><strong>Price:</strong> ${{ pet.price }}</p>
 
             <p>
-              <strong>Status:</strong>
+              <strong>Status: </strong>
               <span :class="pet.status.toLowerCase()">
                 {{ pet.status }}
               </span>
