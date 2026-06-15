@@ -315,10 +315,11 @@ function deletepet(item) {
   padding: 20px;
   height: fit-content;
 }
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   margin-top: 20px;
 }
 
@@ -338,7 +339,6 @@ function deletepet(item) {
   margin: 6px 0;
 }
 
-/* Button */
 .adopt-btn {
   margin-top: 10px;
   padding: 8px 12px;
