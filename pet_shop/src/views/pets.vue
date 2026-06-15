@@ -12,6 +12,7 @@
             <p><strong>Age:</strong> {{ pet.age }}</p>
             <p><strong>Gender:</strong> {{ pet.gender }}</p>
             <p><strong>Price:</strong> ${{ pet.price }}</p>
+
             <p>
               <strong>Status:</strong>
               <span :class="pet.status.toLowerCase()">
@@ -19,6 +20,15 @@
               </span>
             </p>
           </div>
+
+          <!-- ADOPT BUTTON -->
+          <button
+            class="adopt-btn"
+            :disabled="pet.status !== 'Available'"
+            @click="adoptPet(pet.id)"
+          >
+            Adopt
+          </button>
         </div>
       </div>
     </div>
@@ -128,6 +138,15 @@ const pets = [
     },
   ],
 ]
+
+// ADOPT FUNCTION
+function adoptPet(id) {
+  const pet = pets[0].find((p) => p.id === id)
+
+  if (pet && pet.status === 'Available') {
+    pet.status = 'Adopted'
+  }
+}
 </script>
 
 <style scoped>
@@ -144,11 +163,6 @@ const pets = [
   padding: 16px;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
 }
 
 .name {
@@ -157,6 +171,23 @@ const pets = [
 
 .info p {
   margin: 6px 0;
+}
+
+/* Button */
+.adopt-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.adopt-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .available {
@@ -171,6 +202,11 @@ const pets = [
 
 .pending {
   color: orange;
+  font-weight: bold;
+}
+
+.adopted {
+  color: blue;
   font-weight: bold;
 }
 </style>
